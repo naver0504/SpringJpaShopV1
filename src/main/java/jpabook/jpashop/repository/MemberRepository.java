@@ -1,11 +1,12 @@
 package jpabook.jpashop.repository;
 
+import jpabook.jpashop.controller.LoginForm;
 import jpabook.jpashop.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MemberRepository {
@@ -26,13 +27,17 @@ public class MemberRepository {
 
     }
 
-    public Member findByLoginId(String loginId) {
+    public Optional<Member> findByLoginForm(LoginForm loginForm) {
 
-        Member member = em.createQuery("select m from Member m where m.loginId = :loginId", Member.class)
+        String loginId = loginForm.getLoginId();
+        String password = loginForm.getPassword();
+
+        List<Member> member = em.createQuery("select m from Member m where m.loginId = :loginId and m.password = :password", Member.class)
                 .setParameter("loginId", loginId)
-                .getSingleResult();
+                .setParameter("password", password)
+                .getResultList();
 
-        return member;
+        return member.stream().findAny();
 
     }
     public List<Member> findAll() {
