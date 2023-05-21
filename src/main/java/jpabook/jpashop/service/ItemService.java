@@ -20,7 +20,10 @@ public class ItemService {
     public void saveItem(Item item) {
 
         itemRepository.save(item);
+
     }
+
+
 
     @Transactional
     public void updateItem(Long itemId, String name, int price, int stockQuantity) {
@@ -28,6 +31,8 @@ public class ItemService {
         findItem.setName(name);
         findItem.setPrice(price);
         findItem.setStockQuantity(stockQuantity);
+
+
 
     }
 
@@ -37,6 +42,10 @@ public class ItemService {
 
     public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
+    }
+
+    public Item findWithComment(Long commentId) {
+        return itemRepository.findWithComment(commentId);
     }
 
 }

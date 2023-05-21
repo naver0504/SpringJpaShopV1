@@ -1,10 +1,12 @@
 package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.domain.Comment;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -29,13 +31,18 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
+
     @ManyToOne(fetch =  LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
 
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
     private List<Category> categories = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "item")
+    private List<Comment> comments = new ArrayList<>();
 
 
     //비즈니스 로직//

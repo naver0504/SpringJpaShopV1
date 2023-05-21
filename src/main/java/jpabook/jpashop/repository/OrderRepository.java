@@ -66,4 +66,8 @@ public class OrderRepository {
         return null;
 
     }
+
+    public Order findOne(Long orderId) {
+        return em.find(Order.class, orderId);
+    }
 }

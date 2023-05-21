@@ -1,4 +1,4 @@
-package jpabook.jpashop.controller;
+package jpabook.jpashop.controller.dto;
 
 
 import lombok.Getter;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class LoginForm {
+public class LoginDTO {
 
 
     @NotBlank

@@ -29,6 +29,9 @@ public class QMovie extends EntityPathBase<Movie> {
     //inherited
     public final ListPath<jpabook.jpashop.domain.Category, jpabook.jpashop.domain.QCategory> categories;
 
+    //inherited
+    public final ListPath<jpabook.jpashop.domain.Comment, jpabook.jpashop.domain.QComment> comments;
+
     public final StringPath director = createString("director");
 
     //inherited
@@ -66,6 +69,7 @@ public class QMovie extends EntityPathBase<Movie> {
         super(type, metadata, inits);
         this._super = new QItem(type, metadata, inits);
         this.categories = _super.categories;
+        this.comments = _super.comments;
         this.id = _super.id;
         this.member = _super.member;
         this.name = _super.name;

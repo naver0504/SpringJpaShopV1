@@ -24,6 +24,8 @@ public class QItem extends EntityPathBase<Item> {
 
     public final ListPath<jpabook.jpashop.domain.Category, jpabook.jpashop.domain.QCategory> categories = this.<jpabook.jpashop.domain.Category, jpabook.jpashop.domain.QCategory>createList("categories", jpabook.jpashop.domain.Category.class, jpabook.jpashop.domain.QCategory.class, PathInits.DIRECT2);
 
+    public final ListPath<jpabook.jpashop.domain.Comment, jpabook.jpashop.domain.QComment> comments = this.<jpabook.jpashop.domain.Comment, jpabook.jpashop.domain.QComment>createList("comments", jpabook.jpashop.domain.Comment.class, jpabook.jpashop.domain.QComment.class, PathInits.DIRECT2);
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final jpabook.jpashop.domain.QMember member;

@@ -26,8 +26,16 @@ public class ItemRepository {
     }
 
     public List<Item> findAll() {
-        return em.createQuery("select i from Item i", Item.class)
+        return em.createQuery("select i from Item i join fetch i.member", Item.class)
                 .getResultList();
     }
+
+    public Item findWithComment(Long id) {
+        return  em.createQuery("select i from Item i left join fetch i.comments where i.id = :id", Item.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+
 
 }

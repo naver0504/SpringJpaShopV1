@@ -2,6 +2,7 @@ package jpabook.jpashop.controller;
 
 import jpabook.jpashop.SessionConst;
 import jpabook.jpashop.argumentresolver.Login;
+import jpabook.jpashop.controller.dto.LoginDTO;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -41,13 +41,13 @@ public class LoginController {
     @GetMapping("/login")
     public String loginMember(Model model) {
 
-        LoginForm loginForm = new LoginForm();
+        LoginDTO loginForm = new LoginDTO();
         model.addAttribute("loginForm", loginForm);
         return "/login/loginForm";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute @Validated LoginForm form, HttpServletRequest request,BindingResult bindingResult, Model model
+    public String login(@ModelAttribute @Validated LoginDTO form, HttpServletRequest request, BindingResult bindingResult, Model model
             , @RequestParam(defaultValue = "/") String redirectURL) {
 
         if(bindingResult.hasErrors())

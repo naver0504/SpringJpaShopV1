@@ -18,9 +18,9 @@
       </thead>
       <tbody>
       <tr th:each="item : ${items}">
-        <td th:text="${item.getMember().getName()}"> </td>
         <td th:text="${item.id}"></td>
-        <td th:text="${item.name}"></td>
+        <td th:text="${item.member.name}"> </td>
+        <td><a href="item.html" th:href="@{|/items/${item.id}|}" th:text="${item.name}">상품명</a></td>
         <td th:text="${item.price}"></td>
         <td th:text="${item.stockQuantity}"></td>
         <td>

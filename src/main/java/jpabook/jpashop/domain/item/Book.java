@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain.item;
 
+import jpabook.jpashop.controller.dto.CommentDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,4 +15,9 @@ public class Book extends Item{
 
     private String author;
     private String isbn;
+
+    public static CommentDTO BookToDTO(Item item) {
+        CommentDTO bookDTO = new CommentDTO();
+        return bookDTO;
+    }
 }

@@ -30,6 +30,9 @@ public class QBook extends EntityPathBase<Book> {
     public final ListPath<jpabook.jpashop.domain.Category, jpabook.jpashop.domain.QCategory> categories;
 
     //inherited
+    public final ListPath<jpabook.jpashop.domain.Comment, jpabook.jpashop.domain.QComment> comments;
+
+    //inherited
     public final NumberPath<Long> id;
 
     public final StringPath isbn = createString("isbn");
@@ -66,6 +69,7 @@ public class QBook extends EntityPathBase<Book> {
         super(type, metadata, inits);
         this._super = new QItem(type, metadata, inits);
         this.categories = _super.categories;
+        this.comments = _super.comments;
         this.id = _super.id;
         this.member = _super.member;
         this.name = _super.name;

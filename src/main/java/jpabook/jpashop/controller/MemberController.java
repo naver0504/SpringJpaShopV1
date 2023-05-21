@@ -1,26 +1,18 @@
 package jpabook.jpashop.controller;
 
-import jpabook.jpashop.SessionConst;
+import jpabook.jpashop.controller.dto.MemberDTO;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.net.URI;
 import java.util.List;
 
 @Controller
@@ -33,12 +25,12 @@ public class MemberController {
 
     @GetMapping("/new")
     public String createForm(Model model) {
-        model.addAttribute("memberForm", new MemberForm());
+        model.addAttribute("memberForm", new MemberDTO());
         return "/members/createMemberForm";
     }
 
     @PostMapping("/new")
-    public String create(@Validated @ModelAttribute("memberForm") MemberForm form, BindingResult bindingResult, HttpServletRequest request
+    public String create(@Validated @ModelAttribute("memberForm") MemberDTO form, BindingResult bindingResult, HttpServletRequest request
     ) {
         if (bindingResult.hasErrors()) {
             return "/members/createMemberForm";

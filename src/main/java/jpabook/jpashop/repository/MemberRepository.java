@@ -1,6 +1,6 @@
 package jpabook.jpashop.repository;
 
-import jpabook.jpashop.controller.LoginForm;
+import jpabook.jpashop.controller.dto.LoginDTO;
 import jpabook.jpashop.domain.Member;
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +27,7 @@ public class MemberRepository {
 
     }
 
-    public Optional<Member> findByLoginForm(LoginForm loginForm) {
+    public Optional<Member> findByLoginForm(LoginDTO loginForm) {
 
         String loginId = loginForm.getLoginId();
         String password = loginForm.getPassword();
