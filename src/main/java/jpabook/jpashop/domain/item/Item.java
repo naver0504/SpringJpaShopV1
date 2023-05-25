@@ -2,6 +2,7 @@ package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.Category;
 import jpabook.jpashop.domain.Comment;
+import jpabook.jpashop.domain.ItemImg;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
@@ -35,6 +36,10 @@ public abstract class Item {
     @ManyToOne(fetch =  LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToOne(fetch = LAZY, mappedBy = "item", cascade = CascadeType.ALL)
+    @JoinColumn(name = "itemImg_id")
+    private ItemImg itemImg;
 
 
     @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)

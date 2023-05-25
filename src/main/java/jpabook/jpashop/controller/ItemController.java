@@ -4,19 +4,27 @@ import jpabook.jpashop.argumentresolver.Login;
 import jpabook.jpashop.controller.dto.BookForm;
 import jpabook.jpashop.controller.dto.CommentDTO;
 import jpabook.jpashop.domain.Comment;
+import jpabook.jpashop.domain.ItemImg;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.service.CommentService;
+import jpabook.jpashop.service.ItemImgService;
 import jpabook.jpashop.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -27,6 +35,7 @@ public class ItemController {
     private final ItemService itemService;
     private final MemberRepository memberRepository;
     private final CommentService commentService;
+    private final ItemImgService itemImgService;
 
     @GetMapping("/new")
     public String createForm(Model model) {
@@ -36,8 +45,11 @@ public class ItemController {
 
     @PostMapping("/new")
     @Transactional
-    public String create(BookForm form, @Login Member member) {
+    public String create(@Validated BookForm form, BindingResult bindingResult, @Login Member member) throws IOException {
 
+        if (bindingResult.hasErrors()) {
+            return "/items/createItemForm";
+        }
         Member findMember = memberRepository.findOne(member.getId());
         Book book = new Book();
         book.setName(form.getName());
@@ -46,8 +58,9 @@ public class ItemController {
         book.setStockQuantity(form.getStockQuantity());
         book.setAuthor(form.getAuthor());
         book.setMember(findMember);
+        MultipartFile file = form.getFile();
         itemService.saveItem(book);
-
+        itemImgService.save(file, book);
         return "redirect:/home";
     }
 
@@ -55,6 +68,7 @@ public class ItemController {
     public String showItem(@PathVariable Long itemId, Model model) {
 
         Item item = itemService.findWithComment(itemId);
+        ItemImg itemImg = itemImgService.findByItem(item);
         Book book = (Book) item;
         CommentDTO commentDTO = new CommentDTO();
         model.addAttribute("item", book);

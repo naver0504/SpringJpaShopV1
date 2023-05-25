@@ -28,6 +28,8 @@ public class QItem extends EntityPathBase<Item> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final jpabook.jpashop.domain.QItemImg itemImg;
+
     public final jpabook.jpashop.domain.QMember member;
 
     public final StringPath name = createString("name");
@@ -54,6 +56,7 @@ public class QItem extends EntityPathBase<Item> {
 
     public QItem(Class<? extends Item> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.itemImg = inits.isInitialized("itemImg") ? new jpabook.jpashop.domain.QItemImg(forProperty("itemImg"), inits.get("itemImg")) : null;
         this.member = inits.isInitialized("member") ? new jpabook.jpashop.domain.QMember(forProperty("member"), inits.get("member")) : null;
     }
 

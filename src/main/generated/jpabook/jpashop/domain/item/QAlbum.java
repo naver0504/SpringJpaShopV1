@@ -38,6 +38,9 @@ public class QAlbum extends EntityPathBase<Album> {
     public final NumberPath<Long> id;
 
     // inherited
+    public final jpabook.jpashop.domain.QItemImg itemImg;
+
+    // inherited
     public final jpabook.jpashop.domain.QMember member;
 
     //inherited
@@ -71,6 +74,7 @@ public class QAlbum extends EntityPathBase<Album> {
         this.categories = _super.categories;
         this.comments = _super.comments;
         this.id = _super.id;
+        this.itemImg = _super.itemImg;
         this.member = _super.member;
         this.name = _super.name;
         this.price = _super.price;
