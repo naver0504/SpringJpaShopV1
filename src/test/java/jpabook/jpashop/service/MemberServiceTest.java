@@ -5,6 +5,7 @@ import jpabook.jpashop.repository.MemberRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,9 @@ class MemberServiceTest {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Value("${spring.mail.username}")
+    private String username;
 
     @Test
     public void 회원가입() {
@@ -55,6 +59,11 @@ class MemberServiceTest {
                 .isInstanceOf(IllegalStateException.class);
 
 
+    }
+
+    @Test
+    public void ValueTest() {
+        System.out.println("username = " + username);
     }
 
 

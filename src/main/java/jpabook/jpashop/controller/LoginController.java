@@ -2,9 +2,11 @@ package jpabook.jpashop.controller;
 
 import jpabook.jpashop.SessionConst;
 import jpabook.jpashop.argumentresolver.Login;
+import jpabook.jpashop.controller.dto.EmailDTO;
 import jpabook.jpashop.controller.dto.LoginDTO;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
+import jpabook.jpashop.service.EmailService;
 import jpabook.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +16,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,8 +28,6 @@ import java.util.Optional;
 public class LoginController {
 
     private final MemberRepository memberRepository;
-    private final MemberService memberService;
-
     @GetMapping("/")
     public String Home(@Login Member loginMember, Model model) {
 
@@ -69,6 +71,8 @@ public class LoginController {
     }
 
 
+
+
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
@@ -83,6 +87,8 @@ public class LoginController {
     public String home() {
         return "/home";
     }
+
+
 
 
 
