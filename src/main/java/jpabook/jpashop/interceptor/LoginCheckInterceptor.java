@@ -1,6 +1,6 @@
 package jpabook.jpashop.interceptor;
 
-import jpabook.jpashop.SessionConst;
+import jpabook.jpashop.ConstString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -18,7 +18,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         HttpSession session = request.getSession();
 
-        if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
+        if (session == null || session.getAttribute(ConstString.LOGIN_MEMBER) == null) {
             response.sendRedirect("/login?redirectURL="+ requestURI);
             return false;
         }

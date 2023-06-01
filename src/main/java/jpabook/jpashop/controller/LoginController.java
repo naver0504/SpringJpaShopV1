@@ -1,13 +1,10 @@
 package jpabook.jpashop.controller;
 
-import jpabook.jpashop.SessionConst;
+import jpabook.jpashop.ConstString;
 import jpabook.jpashop.argumentresolver.Login;
-import jpabook.jpashop.controller.dto.EmailDTO;
 import jpabook.jpashop.controller.dto.LoginDTO;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
-import jpabook.jpashop.service.EmailService;
-import jpabook.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -16,11 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 @RequiredArgsConstructor
@@ -64,7 +59,7 @@ public class LoginController {
 
         HttpSession session = request.getSession();
 
-        session.setAttribute(SessionConst.LOGIN_MEMBER,loginMember.get());
+        session.setAttribute(ConstString.LOGIN_MEMBER,loginMember.get());
 
         return "redirect:" + redirectURL;
 

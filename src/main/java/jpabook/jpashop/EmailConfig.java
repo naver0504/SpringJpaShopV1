@@ -1,5 +1,7 @@
 package jpabook.jpashop;
 
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,13 +11,15 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
+@Slf4j
+@Getter
 public class EmailConfig {
 
-    @Value("${spring.mail.username")
-    String userName;
+    @Value("${spring.mail.username}")
+    private  String userName;
 
-    @Value("${spring.mail.password")
-    String password;
+    @Value("${spring.mail.password}")
+    private  String password;
 
     @Bean
     public JavaMailSender javaMailSender() {
@@ -23,6 +27,7 @@ public class EmailConfig {
         javaMailSender.setHost("smtp.naver.com");
         javaMailSender.setUsername(userName);
         javaMailSender.setPassword(password);
+
 
         javaMailSender.setPort(465);
 

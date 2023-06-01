@@ -1,6 +1,6 @@
 package jpabook.jpashop.argumentresolver;
 
-import jpabook.jpashop.SessionConst;
+import jpabook.jpashop.ConstString;
 import jpabook.jpashop.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -34,6 +34,6 @@ public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolve
         if (session == null) {
             return null;
         }
-        return session.getAttribute(SessionConst.LOGIN_MEMBER);
+        return session.getAttribute(ConstString.LOGIN_MEMBER);
     }
 }

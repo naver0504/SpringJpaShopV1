@@ -11,6 +11,8 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.UUID;
 
+import static jpabook.jpashop.ConstString.*;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -30,8 +32,10 @@ public class EmailService {
         String toEmail = email;
         String title = "email 연습";
         log.info("toEmail = {}", email);
+        log.info("auth = {}", authNum);
         MimeMessage message = javaMailSender.createMimeMessage();
         message.setSubject(title);
+        message.setFrom(EMAIL_SENDER);
         message.addRecipients(MimeMessage.RecipientType.TO, email);
         message.setText(setContext(authNum));
 
