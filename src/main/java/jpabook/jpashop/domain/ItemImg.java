@@ -3,7 +3,7 @@ package jpabook.jpashop.domain;
 
 import jpabook.jpashop.ImagePath;
 import jpabook.jpashop.domain.item.Item;
-import lombok.Data;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +15,10 @@ import static jpabook.jpashop.ImagePath.*;
 
 @Entity
 @Slf4j
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemImg {
 
     @Id @GeneratedValue
@@ -32,21 +35,21 @@ public class ItemImg {
 
     private String filePath;
 
-    public  static ItemImg createItemImg(MultipartFile multipartFile, Item item) {
-
+    public static ItemImg createItemImg(MultipartFile multipartFile, Item item) {
         ItemImg itemImg = new ItemImg();
         String originalFilename = multipartFile.getOriginalFilename();
         itemImg.setOriginalFileName(originalFilename);
         itemImg.setStoredFileName(createStoreFileName(originalFilename));
-        itemImg.setItem(item, itemImg);
+        itemImg.setItem(item);
         itemImg.setFilePath(ImagePath.filePath+itemImg.getStoredFileName());
+        log.info("filePath = {}", itemImg.getFilePath());
         return itemImg;
 
     }
 
-    public void setItem(Item item, ItemImg itemImg) {
-        item.setItemImg(itemImg);
-        itemImg.setItem(item);
+    public void setItem(Item item) {
+        this.setItem(item);
+        item.setItemImg(this);
     }
 
     private static String createStoreFileName(String originalFilename) {

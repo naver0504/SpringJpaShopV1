@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static jpabook.jpashop.domain.OrderItem.*;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -35,7 +37,7 @@ public class OrderService {
         delivery.setStatus(DeliveryStatus.READY);
 
         //주문 상품 생성
-        OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
+        OrderItem orderItem = createOrderItem(item, item.getPrice(), count);
 
         //주문 생성
         Order order = Order.createOrder(member, delivery, orderItem);
