@@ -48,7 +48,7 @@ public class ItemImg {
     }
 
     public void setItem(Item item) {
-        this.setItem(item);
+        this.item = item;
         item.setItemImg(this);
     }
 

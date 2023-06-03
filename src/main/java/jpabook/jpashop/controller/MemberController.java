@@ -88,7 +88,7 @@ public class MemberController {
 
     @PostMapping("/emailConfirm")
     public String mailConfirm(@ModelAttribute EmailAuthDTO emailAuthDTO) {
-        if (map.get(emailAuthDTO.getEmail()) == emailAuthDTO.getAuth()) {
+        if (map.get(emailAuthDTO.getEmail()).equals(emailAuthDTO.getAuth())) {
             return "redirect:/";
         }
 

@@ -31,7 +31,7 @@ public class ItemRepository {
     }
 
     public Item findWithComment(Long id) {
-        return  em.createQuery("select i from Item i left join fetch i.comments where i.id = :id", Item.class)
+        return  em.createQuery("select i from Item i left join fetch i.comments left join fetch i.itemImg where i.id = :id", Item.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }

@@ -38,10 +38,8 @@ public class OrderService {
 
         //주문 상품 생성
         OrderItem orderItem = createOrderItem(item, item.getPrice(), count);
-
         //주문 생성
         Order order = Order.createOrder(member, delivery, orderItem);
-
         //주문 저장
         orderRepository.save(order);
         return order.getId();

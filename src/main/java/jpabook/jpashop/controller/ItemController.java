@@ -44,7 +44,6 @@ public class ItemController {
     }
 
     @PostMapping("/new")
-    @Transactional
     public String create(@Validated BookForm form, BindingResult bindingResult, @Login Member member) throws IOException {
 
         if (bindingResult.hasErrors()) {
@@ -60,7 +59,7 @@ public class ItemController {
         book.setMember(findMember);
         MultipartFile file = form.getFile();
         itemService.saveItem(book);
-        itemImgService.save(file, book);
+        itemImgService.save(file, book.getId());
         return "redirect:/home";
     }
 
@@ -68,7 +67,6 @@ public class ItemController {
     public String showItem(@PathVariable Long itemId, Model model) {
 
         Item item = itemService.findWithComment(itemId);
-        ItemImg itemImg = itemImgService.findByItem(item);
         Book book = (Book) item;
         CommentDTO commentDTO = new CommentDTO();
         model.addAttribute("item", book);
